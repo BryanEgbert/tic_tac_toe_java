@@ -60,7 +60,7 @@ public class TicTacToeServiceTest {
     }
 
     @Test
-    public void WritePlayerO_ShouldReplaceEmptyCharWithO() {
+    public void WritePlayerO_ShouldReplaceEmptyCharWithO() throws Exception {
         TicTacToeService sut = new TicTacToeService();
         Character expected = 'O';
 
@@ -69,8 +69,8 @@ public class TicTacToeServiceTest {
         assertEquals(expected, sut.GetBoard().get(0).get(0));
     }
 
-    @Test
-    public void WritePlayerO_ShouldNotReplaceNonEmptyCharWithO() {
+    @Test(expected = Exception.class)
+    public void WritePlayerO_ShouldReturnException_WhenUserTryingToReplaceNonEmptyCharWithO() throws Exception {
         List<Character> firstColumn = new ArrayList<>(Arrays.asList('X', 'X', 'O'));
         List<Character> secondColumn = new ArrayList<>(Arrays.asList('O', 'O', 'X'));
         List<Character> thirdColumn = new ArrayList<>(Arrays.asList('X', 'O', 'X'));
@@ -80,16 +80,15 @@ public class TicTacToeServiceTest {
             add(thirdColumn);
         }};
 
-        Character expected = 'X';
         TicTacToeService sut = new TicTacToeService(board);
 
         sut.Write(Player.O, 0, 0);
-
-        assertEquals(expected, sut.GetBoard().get(0).get(0));
+        // assertEquals(expected, sut.GetBoard().get(0).get(0));
+        
     }
 
     @Test
-    public void WritePlayerX_ShouldReplaceEmptyCharWithX() {
+    public void WritePlayerX_ShouldReplaceEmptyCharWithX() throws Exception {
         TicTacToeService sut = new TicTacToeService();
         Character expected = 'X';
 
@@ -98,8 +97,8 @@ public class TicTacToeServiceTest {
         assertEquals(expected, sut.GetBoard().get(0).get(0));
     }
 
-    @Test
-    public void WritePlayerX_ShouldNotReplaceNonEmptyCharWithX() {
+    @Test(expected = Exception.class)
+    public void WritePlayerX_ShouldReturnException_WhenUserTryingToReplaceNonEmptyCharWithX() throws Exception {
         List<Character> firstColumn = new ArrayList<>(Arrays.asList('X', 'X', 'O'));
         List<Character> secondColumn = new ArrayList<>(Arrays.asList('O', 'O', 'X'));
         List<Character> thirdColumn = new ArrayList<>(Arrays.asList('X', 'O', 'X'));
@@ -109,12 +108,9 @@ public class TicTacToeServiceTest {
             add(thirdColumn);
         }};
 
-        Character expected = 'O';
         TicTacToeService sut = new TicTacToeService(board);
 
         sut.Write(Player.X, 0, 2);
-
-        assertEquals(expected, sut.GetBoard().get(0).get(2));
     }
 
     @Test

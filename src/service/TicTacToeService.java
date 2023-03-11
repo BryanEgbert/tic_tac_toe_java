@@ -37,18 +37,21 @@ public class TicTacToeService implements ITicTacToeService{
     }
 
     @Override
-    public void Write(Player player, int x, int y) {
-        if (board.get(x).get(y) == ' ')
-        switch (player) {
-            case O:
-                board.get(x).set(y, 'O');
-                break;
-            case X:
-                board.get(x).set(y, 'X');
-                break;
-            default:
-                break;
+    public void Write(Player player, int x, int y) throws Exception {
+        if (board.get(x).get(y) == ' ') {
+            switch (player) {
+                case O:
+                    board.get(x).set(y, 'O');
+                    return;
+                case X:
+                    board.get(x).set(y, 'X');
+                    return;
+                default:
+                    return;
+            }
         }
+
+        throw new Exception("Cannot replace 'X' and 'O'");
     }
 
     @Override
